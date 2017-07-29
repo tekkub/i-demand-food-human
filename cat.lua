@@ -29,7 +29,7 @@ function Cat:Randomize(food_row, food_col)
   repeat
     row, col = Room:GetRandom()
   until row ~= food_row or col ~= food_col
-  return row, col
+  Messages:SendMessage("CatMoved", row, col)
 end
 
 

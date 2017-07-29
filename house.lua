@@ -33,24 +33,20 @@ local function Initialize()
     y_offset = y_offset + C.ROOM_SIZE + C.ROOM_MARGIN
   end
 
-  House:Randomize()
-
   Messages:RegisterCallback(House, "CatMoved")
   Messages:RegisterCallback(House, "StartNewGame")
+
+  House:Randomize()
 end
 
 
 function House:Randomize()
   food_row, food_col = Room:GetRandom()
-  local cat_row, cat_col = Cat:Randomize(food_row, food_col)
-
   for room in pairs(flat_rooms) do
     room:Reset(food_row, food_col)
   end
 
-  local cat_room = rooms[cat_row][cat_col]
-  cat_room:Light()
-  Cat:SetParent(cat_room)
+  Cat:Randomize(food_row, food_col)
 end
 
 
