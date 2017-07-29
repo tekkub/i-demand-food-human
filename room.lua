@@ -27,6 +27,7 @@ function Room:Initialize(x, y, row, col, ...)
   self._col = col
 
   Messages:RegisterCallback(self, "CatMoved")
+  Messages:RegisterCallback(self, "FoodMoved")
 
   return super(self, x, y, row, col, ...)
 end
@@ -69,6 +70,11 @@ end
 
 function Room:Light()
   self._lit = true
+end
+
+
+function Room:OnFoodMoved(message, row, col)
+  self:Reset(row, col)
 end
 
 

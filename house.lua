@@ -11,7 +11,6 @@ local House = {}
 
 local food_row, food_col
 local rooms = {}
-local flat_rooms = {}
 
 
 local function Initialize()
@@ -25,7 +24,6 @@ local function Initialize()
       local room = Room(x_offset, y_offset, row, col)
       room.row, room.col = row, col
       rooms[row][col] = room
-      flat_rooms[room] = true
 
       x_offset = x_offset + C.ROOM_SIZE + C.ROOM_MARGIN
     end
@@ -42,10 +40,7 @@ end
 
 function House:Randomize()
   food_row, food_col = Room:GetRandom()
-  for room in pairs(flat_rooms) do
-    room:Reset(food_row, food_col)
-  end
-
+  Messages:SendMessage("FoodMoved", food_row, food_col)
   Cat:Randomize(food_row, food_col)
 end
 
