@@ -12,7 +12,6 @@ local flat_rooms = {}
 
 
 local function Initialize()
-  Room:SetSize(C.ROOM_SIZE)
   local y_offset = C.HOUSE_MARGIN
 
   for row=1,C.NUM_ROWS do

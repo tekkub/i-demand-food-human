@@ -10,13 +10,6 @@ local DARK_COLOR = C.COLORS.COMPLEMENT_5
 local TEXT_COLOR = C.COLORS.SECONDARY_B2
 local FOOD_COLOR = C.COLORS.SECONDARY_B5
 
-local size
-
-
-function Class:SetSize(new_size)
-  size = new_size
-end
-
 
 function Class:GetRandom()
   return math.random(C.NUM_ROWS), math.random(C.NUM_COLS)
@@ -46,7 +39,7 @@ function Room:Draw()
 
   local color = self._lit and LIT_COLOR or DARK_COLOR
   love.graphics.setColor(color)
-  love.graphics.rectangle("fill", 0, 0, size, size)
+  love.graphics.rectangle("fill", 0, 0, C.ROOM_SIZE, C.ROOM_SIZE)
 
   if Cat:IsInRoom(self._row, self._col) then Cat:Draw() end
 
@@ -57,8 +50,8 @@ function Room:Draw()
 
     -- Draw the food
     if self._dist == 0 then
-      local offset = size/2
-      local radius = size/8
+      local offset = C.ROOM_SIZE/2
+      local radius = C.ROOM_SIZE/8
       love.graphics.setColor(FOOD_COLOR)
       love.graphics.circle("fill", offset, offset, radius, 50)
     end
