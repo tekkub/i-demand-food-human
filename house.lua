@@ -10,7 +10,6 @@ local House = {}
 
 
 local food_row, food_col
-local rooms = {}
 
 
 local function Initialize()
@@ -18,13 +17,9 @@ local function Initialize()
 
   for row=1,C.NUM_ROWS do
     local x_offset = C.HOUSE_MARGIN
-    rooms[row] = {}
 
     for col=1,C.NUM_COLS do
-      local room = Room(x_offset, y_offset, row, col)
-      room.row, room.col = row, col
-      rooms[row][col] = room
-
+      Room(x_offset, y_offset, row, col)
       x_offset = x_offset + C.ROOM_SIZE + C.ROOM_MARGIN
     end
 
@@ -46,11 +41,7 @@ end
 
 
 function House:OnCatMoved(message, row, col)
-  local cat_room = rooms[row][col]
-  Cat:SetParent(cat_room)
-
-  if row ~= food_row or col ~= food_col then return end
-  Agni:SendMessage("Win")
+  if row == food_row and col == food_col then Agni:SendMessage("Win") end
 end
 
 

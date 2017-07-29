@@ -16,12 +16,18 @@ local VERTICES = {8, 0, 16, 8, 8, 16, 0, 8}
 local row, col, power
 
 
+local function Moved()
+  Cat:SetParent(Room:GetRoom(row, col))
+  Agni:SendMessage("CatMoved", row, col)
+end
+
+
 function Cat:Randomize(food_row, food_col)
   power = 10
   repeat
     row, col = Room:GetRandom()
   until row ~= food_row or col ~= food_col
-  Agni:SendMessage("CatMoved", row, col)
+  Moved()
 end
 
 
@@ -36,50 +42,55 @@ function Cat:Draw()
 end
 
 
-local function SendMovedMessage()
-  power = power - 1
-  Agni:SendMessage("CatMoved", row, col)
-end
-
-
 local function MoveLeft()
   if col <= 1 then return end
   col = col - 1
-  SendMovedMessage()
+  power = power - 1
+  Moved()
 end
 
 
 local function MoveRight()
   if col >= C.NUM_COLS then return end
   col = col + 1
-  SendMovedMessage()
+  power = power - 1
+  Moved()
 end
 
 
 local function MoveUp()
   if row <= 1 then return end
   row = row - 1
-  SendMovedMessage()
+  power = power - 1
+  Moved()
 end
 
 
 local function MoveDown()
   if row >= C.NUM_ROWS then return end
   row = row + 1
-  SendMovedMessage()
+  power = power - 1
+  Moved()
 end
 
 
+local keymap = {
+  up    = MoveUp,
+  left  = MoveLeft,
+  down  = MoveDown,
+  right = MoveRight,
+  w     = MoveUp,
+  a     = MoveLeft,
+  s     = MoveDown,
+  d     = MoveRight,
+}
 function Cat:OnKeyPressed(message, key)
   if power == 0 then
     if key == "space" then Agni:SendMessage("StartNewGame") end
     return
   end
 
-  if key == "up"    or key == "w" then MoveUp()    end
-  if key == "left"  or key == "a" then MoveLeft()  end
-  if key == "down"  or key == "s" then MoveDown()  end
-  if key == "right" or key == "d" then MoveRight() end
+  if keymap[key] then keymap[key]() end
 end
 
 

@@ -13,9 +13,16 @@ local DARK_COLOR = C.COLORS.COMPLEMENT_5
 local TEXT_COLOR = C.COLORS.SECONDARY_B2
 local FOOD_COLOR = C.COLORS.SECONDARY_B5
 
+local rooms = {}
+
 
 function Class:GetRandom()
   return math.random(C.NUM_ROWS), math.random(C.NUM_COLS)
+end
+
+
+function Class:GetRoom(row, col)
+  return rooms[row][col]
 end
 
 
@@ -26,6 +33,9 @@ function Room:Initialize(x, y, row, col, ...)
   self._row = row
   self._col = col
 
+  rooms[row] = rooms[row] or {}
+  rooms[row][col] = self
+
   Agni:RegisterCallback(self, "CatMoved")
   Agni:RegisterCallback(self, "FoodMoved")
 
@@ -34,7 +44,7 @@ end
 
 
 function Room:Reset(food_row, food_col)
-  self._dist = math.abs(self.row - food_row) + math.abs(self.col - food_col)
+  self._dist = math.abs(self._row - food_row) + math.abs(self._col - food_col)
   self._lit = false
 end
 
