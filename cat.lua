@@ -19,11 +19,6 @@ function Cat:Randomize(food_row, food_col)
 end
 
 
-function Cat:IsInRoom(_row, _col)
-  return row == _row and col == _col
-end
-
-
 function Cat:Draw()
   love.graphics.push()
   love.graphics.translate(32-8, 48-8)
