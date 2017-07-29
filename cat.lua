@@ -6,7 +6,7 @@ local C = require "constants"
 local Room = require "room"
 
 
-local Class, Cat = class(Gila.Widget)
+local Cat = Gila.Widget()
 
 
 local CAT_COLOR = C.COLORS.SECONDARY_A3
@@ -14,14 +14,6 @@ local TEXT_COLOR = C.COLORS.SECONDARY_B2
 local VERTICES = {8, 0, 16, 8, 8, 16, 0, 8}
 
 local row, col, power
-
-
-local super = Cat.Initialize
-function Cat:Initialize()
-  Messages:RegisterCallback(self, "KeyPressed")
-  Messages:RegisterCallback(self, "Win")
-  super(self)
-end
 
 
 function Cat:Randomize(food_row, food_col)
@@ -113,5 +105,8 @@ function power_widget:Draw()
 end
 
 
-local cat_singleton = Class()
-return cat_singleton
+Messages:RegisterCallback(Cat, "KeyPressed")
+Messages:RegisterCallback(Cat, "Win")
+
+
+return Cat
