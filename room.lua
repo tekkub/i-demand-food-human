@@ -14,8 +14,8 @@ end
 
 local super = Room.Initialize
 function Room:Initialize(x, y, row, col, ...)
-  self._x = x or 20
-  self._y = y or 20
+  self._x = x
+  self._y = y
   self._row = row
   self._col = col
 
