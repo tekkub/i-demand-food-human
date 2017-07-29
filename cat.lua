@@ -1,5 +1,6 @@
 
 local C = require "constants"
+local Room = require "room"
 local Cat = {}
 
 
@@ -9,15 +10,9 @@ local VERTICES = {8, 0, 16, 8, 8, 16, 0, 8}
 local row, col
 
 
-local function Randomize()
-  row = math.random(C.NUM_ROWS)
-  col = math.random(C.NUM_COLS)
-end
-
-
 function Cat:Randomize(food_row, food_col)
   repeat
-    Randomize()
+    row, col = Room:GetRandom()
   until row ~= food_row or col ~= food_col
   return row, col
 end

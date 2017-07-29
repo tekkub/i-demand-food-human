@@ -18,6 +18,11 @@ function Class:SetSize(new_size)
 end
 
 
+function Class:GetRandom()
+  return math.random(C.NUM_ROWS), math.random(C.NUM_COLS)
+end
+
+
 local super = Room.Initialize
 function Room:Initialize(x, y, row, col, ...)
   self._x = x
