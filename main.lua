@@ -1,6 +1,8 @@
 
 require "lib/class"
 
+math.randomseed(os.time())
+
 local Gila = require "lib/gila"
 local House = require "house"
 

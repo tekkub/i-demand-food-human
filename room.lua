@@ -23,6 +23,12 @@ function Room:Initialize(x, y, row, col, ...)
 end
 
 
+function Room:Reset(food_row, food_col)
+  self._dist = math.abs(self.row - food_row) + math.abs(self.col - food_col)
+  self._lit = false
+end
+
+
 function Room:Draw()
   local color = self._lit and LIT_COLOR or DARK_COLOR
   love.graphics.setColor(color)
