@@ -1,6 +1,10 @@
 
-local C = require "constants"
 local Gila = require "lib/gila"
+local Messages = require "lib/messages"
+
+local C = require "constants"
+
+
 local Class, Room = class(Gila.Widget)
 
 
@@ -21,6 +25,8 @@ function Room:Initialize(x, y, row, col, ...)
   self._y = y
   self._row = row
   self._col = col
+
+  Messages:RegisterCallback(self, "CatMoved")
 
   return super(self, x, y, row, col, ...)
 end
@@ -63,6 +69,12 @@ end
 
 function Room:Light()
   self._lit = true
+end
+
+
+function Room:OnCatMoved(message, row, col)
+  if row ~= self._row or col ~= self._col then return end
+  self:Light()
 end
 
 

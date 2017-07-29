@@ -1,7 +1,10 @@
 
+local Messages = require "lib/messages"
+
 local C = require "constants"
 local Cat = require "cat"
 local Room = require "room"
+
 
 local House = {}
 
@@ -31,6 +34,8 @@ local function Initialize()
   end
 
   House:Randomize()
+
+  Messages:RegisterCallback(House, "CatMoved")
 end
 
 
@@ -44,6 +49,12 @@ function House:Randomize()
 
   local cat_room = rooms[cat_row][cat_col]
   cat_room:Light()
+  Cat:SetParent(cat_room)
+end
+
+
+function House:OnCatMoved(message, row, col)
+  local cat_room = rooms[row][col]
   Cat:SetParent(cat_room)
 end
 

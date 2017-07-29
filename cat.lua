@@ -2,6 +2,9 @@
 local C = require "constants"
 local Room = require "room"
 local Gila = require "lib/gila"
+local Messages = require "lib/messages"
+
+
 local Class, Cat = class(Gila.Widget)
 
 
@@ -9,6 +12,13 @@ local CAT_COLOR = C.COLORS.SECONDARY_A3
 local VERTICES = {8, 0, 16, 8, 8, 16, 0, 8}
 
 local row, col
+
+
+local super = Cat.Initialize
+function Cat:Initialize()
+  Messages:RegisterCallback(self, "KeyPressed")
+  super(self)
+end
 
 
 function Cat:Randomize(food_row, food_col)
@@ -27,6 +37,47 @@ function Cat:Draw()
   love.graphics.polygon("fill", VERTICES)
 
   love.graphics.pop()
+end
+
+
+local function SendMovedMessage()
+  Messages:SendMessage("CatMoved", row, col)
+end
+
+
+local function MoveLeft()
+  if col <= 1 then return end
+  col = col - 1
+  SendMovedMessage()
+end
+
+
+local function MoveRight()
+  if col >= C.NUM_COLS then return end
+  col = col + 1
+  SendMovedMessage()
+end
+
+
+local function MoveUp()
+  if row <= 1 then return end
+  row = row - 1
+  SendMovedMessage()
+end
+
+
+local function MoveDown()
+  if row >= C.NUM_ROWS then return end
+  row = row + 1
+  SendMovedMessage()
+end
+
+
+function Cat:OnKeyPressed(message, key)
+  if key == "up"    or key == "w" then MoveUp()    end
+  if key == "left"  or key == "a" then MoveLeft()  end
+  if key == "down"  or key == "s" then MoveDown()  end
+  if key == "right" or key == "d" then MoveRight() end
 end
 
 
