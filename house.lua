@@ -3,6 +3,7 @@ local Agni = require "lib/agni"
 
 local C = require "constants"
 local Cat = require "cat"
+local CatPower = require "catpower"
 local Food = require "food"
 local Room = require "room"
 
@@ -36,6 +37,7 @@ end
 function House:Randomize()
   Food:Randomize()
   Cat:Randomize()
+  CatPower:Reset()
 end
 
 
