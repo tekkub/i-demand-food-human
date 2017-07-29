@@ -1,17 +1,18 @@
 
-require "lib/class"
-
 math.randomseed(os.time())
 
+
+require "lib/class"
+local C = require "constants"
 local Gila = require "lib/gila"
 local House = require "house"
 
 
 function love.load()
-  love.graphics.setNewFont(24)
-  love.graphics.setBackgroundColor(46, 69, 57)
 
   House()
+  love.graphics.setNewFont(C.FONT_SIZE)
+  love.graphics.setBackgroundColor(C.COLORS.SECONDARY_A4)
 end
 
 

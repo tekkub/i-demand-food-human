@@ -1,13 +1,13 @@
 
-local Colors = require "colors"
+local C = require "constants"
 local Gila = require "lib/gila"
 local Class, Room = class(Gila.Widget)
 
 
-local LIT_COLOR = Colors.primary_4
-local DARK_COLOR = Colors.complement_5
-local TEXT_COLOR = Colors.secondary_b2
-local FOOD_COLOR = Colors.secondary_b5
+local LIT_COLOR = C.COLORS.PRIMARY_4
+local DARK_COLOR = C.COLORS.COMPLEMENT_5
+local TEXT_COLOR = C.COLORS.SECONDARY_B2
+local FOOD_COLOR = C.COLORS.SECONDARY_B5
 
 local size
 
