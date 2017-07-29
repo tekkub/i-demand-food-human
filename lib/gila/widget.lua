@@ -9,10 +9,17 @@ function Class:Draw()
   for widget in pairs(widgets) do
     if not parents[widget] then
       love.graphics.push()
+
       widget:Draw()
+
       for child,parent in pairs(parents) do
-        if parent == widget then child:Draw() end
+        if parent == widget then
+          love.graphics.push()
+          child:Draw()
+          love.graphics.pop()
+        end
       end
+
       love.graphics.pop()
     end
   end

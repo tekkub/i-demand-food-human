@@ -13,7 +13,7 @@ local CAT_COLOR = C.COLORS.SECONDARY_A3
 local TEXT_COLOR = C.COLORS.SECONDARY_B2
 local VERTICES = {8, 0, 16, 8, 8, 16, 0, 8}
 
-local row, col, power
+local row, col, power, food_row, food_col
 
 
 local function Moved()
@@ -22,7 +22,8 @@ local function Moved()
 end
 
 
-function Cat:Randomize(food_row, food_col)
+function Cat:Randomize()
+  assert(food_row and food_col, "food row and column not set")
   power = 10
   repeat
     row, col = Room:GetRandom()
@@ -35,6 +36,11 @@ function Cat:Draw()
   love.graphics.translate(32-8, 48-8)
   love.graphics.setColor(CAT_COLOR)
   love.graphics.polygon("fill", VERTICES)
+end
+
+
+function Cat:OnFoodMoved(message, row, col)
+  food_row, food_col = row, col
 end
 
 
@@ -109,6 +115,7 @@ function power_widget:Draw()
 end
 
 
+Agni:RegisterCallback(Cat, "FoodMoved")
 Agni:RegisterCallback(Cat, "KeyPressed")
 Agni:RegisterCallback(Cat, "Win")
 

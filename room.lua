@@ -11,7 +11,6 @@ local Class, Room = class(Gila.Widget)
 local LIT_COLOR = C.COLORS.PRIMARY_4
 local DARK_COLOR = C.COLORS.COMPLEMENT_5
 local TEXT_COLOR = C.COLORS.SECONDARY_B2
-local FOOD_COLOR = C.COLORS.SECONDARY_B5
 
 local rooms = {}
 
@@ -57,17 +56,8 @@ function Room:Draw()
   love.graphics.rectangle("fill", 0, 0, C.ROOM_SIZE, C.ROOM_SIZE)
 
   if self._lit then
-    -- Distance text
     love.graphics.setColor(TEXT_COLOR)
     love.graphics.print(self._dist, 4, 4)
-
-    -- Draw the food
-    if self._dist == 0 then
-      local offset = C.ROOM_SIZE/2
-      local radius = C.ROOM_SIZE/8
-      love.graphics.setColor(FOOD_COLOR)
-      love.graphics.circle("fill", offset, offset, radius, 50)
-    end
   end
 end
 

@@ -3,6 +3,7 @@ local Agni = require "lib/agni"
 
 local C = require "constants"
 local Cat = require "cat"
+local Food = require "food"
 local Room = require "room"
 
 
@@ -26,7 +27,6 @@ local function Initialize()
     y_offset = y_offset + C.ROOM_SIZE + C.ROOM_MARGIN
   end
 
-  Agni:RegisterCallback(House, "CatMoved")
   Agni:RegisterCallback(House, "StartNewGame", "Randomize")
 
   House:Randomize()
@@ -34,14 +34,8 @@ end
 
 
 function House:Randomize()
-  food_row, food_col = Room:GetRandom()
-  Agni:SendMessage("FoodMoved", food_row, food_col)
-  Cat:Randomize(food_row, food_col)
-end
-
-
-function House:OnCatMoved(message, row, col)
-  if row == food_row and col == food_col then Agni:SendMessage("Win") end
+  Food:Randomize()
+  Cat:Randomize()
 end
 
 
