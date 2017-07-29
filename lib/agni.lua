@@ -18,8 +18,7 @@ function Agni:SendMessage(message, ...)
 	if not callbacks[message] then return end
 
 	for context,func in pairs(callbacks[message]) do
-    local f = func
-    if type(func) == "string" then f = context[func] end
+    local f = context[func] or func
 		f(context, message, ...)
 	end
 end
