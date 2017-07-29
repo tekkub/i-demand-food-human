@@ -36,6 +36,7 @@ local function Initialize()
   House:Randomize()
 
   Messages:RegisterCallback(House, "CatMoved")
+  Messages:RegisterCallback(House, "StartNewGame")
 end
 
 
@@ -56,6 +57,14 @@ end
 function House:OnCatMoved(message, row, col)
   local cat_room = rooms[row][col]
   Cat:SetParent(cat_room)
+
+  if row ~= food_row or col ~= food_col then return end
+  Messages:SendMessage("Win")
+end
+
+
+function House:OnStartNewGame()
+  self:Randomize()
 end
 
 
