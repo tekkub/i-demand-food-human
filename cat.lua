@@ -9,15 +9,15 @@ local VERTICES = {8, 0, 16, 8, 8, 16, 0, 8}
 local row, col
 
 
-local function Randomize(num_rows, num_cols)
-  row = math.random(num_rows)
-  col = math.random(num_cols)
+local function Randomize()
+  row = math.random(C.NUM_ROWS)
+  col = math.random(C.NUM_COLS)
 end
 
 
-function Cat:Randomize(food_row, food_col, num_rows, num_cols)
+function Cat:Randomize(food_row, food_col)
   repeat
-    Randomize(num_rows, num_cols)
+    Randomize()
   until row ~= food_row or col ~= food_col
   return row, col
 end

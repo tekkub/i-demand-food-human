@@ -38,7 +38,7 @@ end
 function House:Randomize()
   food_row = math.random(C.NUM_ROWS)
   food_col = math.random(C.NUM_COLS)
-  local cat_row, cat_col = Cat:Randomize(food_row, food_col, C.NUM_ROWS, C.NUM_COLS)
+  local cat_row, cat_col = Cat:Randomize(food_row, food_col)
 
   for room in pairs(flat_rooms) do
     room:Reset(food_row, food_col)
