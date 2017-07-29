@@ -7,7 +7,14 @@ local parents = {}
 
 function Class:Draw()
   for widget in pairs(widgets) do
-    if not parents[widget] then widget:Draw() end
+    if not parents[widget] then
+      love.graphics.push()
+      widget:Draw()
+      for child,parent in pairs(parents) do
+        if parent == widget then child:Draw() end
+      end
+      love.graphics.pop()
+    end
   end
 end
 
@@ -23,14 +30,7 @@ end
 
 
 function Widget:Draw()
-  self:DrawChildren()
-end
-
-
-function Widget:DrawChildren()
-  for widget,parent in pairs(parents) do
-    if parent == self then widget:Draw() end
-  end
+  error("Widget:Draw() not implemented")
 end
 
 

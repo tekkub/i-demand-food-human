@@ -32,13 +32,9 @@ end
 
 
 function Cat:Draw()
-  love.graphics.push()
   love.graphics.translate(32-8, 48-8)
-
   love.graphics.setColor(CAT_COLOR)
   love.graphics.polygon("fill", VERTICES)
-
-  love.graphics.pop()
 end
 
 
@@ -102,7 +98,6 @@ end
 local power_widget = Gila.Widget()
 
 
-local super_draw = power_widget.Draw
 function power_widget:Draw()
   love.graphics.setColor(TEXT_COLOR)
 
@@ -111,8 +106,6 @@ function power_widget:Draw()
   else
     love.graphics.print("Power left: ".. power, 30, 600)
   end
-
-  super_draw(self)
 end
 
 

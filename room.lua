@@ -49,9 +49,7 @@ function Room:Reset(food_row, food_col)
 end
 
 
-local draw_super = Room.Draw
 function Room:Draw()
-  love.graphics.push()
   love.graphics.translate(self._x, self._y)
 
   local color = self._lit and LIT_COLOR or DARK_COLOR
@@ -71,10 +69,6 @@ function Room:Draw()
       love.graphics.circle("fill", offset, offset, radius, 50)
     end
   end
-
-  draw_super(self)
-
-  love.graphics.pop()
 end
 
 
