@@ -1,6 +1,5 @@
 
 local C = require "constants"
-local Cat = require "cat"
 local Gila = require "lib/gila"
 local Class, Room = class(Gila.Widget)
 
@@ -33,6 +32,7 @@ function Room:Reset(food_row, food_col)
 end
 
 
+local draw_super = Room.Draw
 function Room:Draw()
   love.graphics.push()
   love.graphics.translate(self._x, self._y)
@@ -40,8 +40,6 @@ function Room:Draw()
   local color = self._lit and LIT_COLOR or DARK_COLOR
   love.graphics.setColor(color)
   love.graphics.rectangle("fill", 0, 0, C.ROOM_SIZE, C.ROOM_SIZE)
-
-  if Cat:IsInRoom(self._row, self._col) then Cat:Draw() end
 
   if self._lit then
     -- Distance text
@@ -56,6 +54,8 @@ function Room:Draw()
       love.graphics.circle("fill", offset, offset, radius, 50)
     end
   end
+
+  draw_super(self)
 
   love.graphics.pop()
 end

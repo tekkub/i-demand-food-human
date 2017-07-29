@@ -42,7 +42,9 @@ function House:Randomize()
     room:Reset(food_row, food_col)
   end
 
-  rooms[cat_row][cat_col]:Light()
+  local cat_room = rooms[cat_row][cat_col]
+  cat_room:Light()
+  Cat:SetParent(cat_room)
 end
 
 

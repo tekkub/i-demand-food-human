@@ -1,7 +1,8 @@
 
 local C = require "constants"
 local Room = require "room"
-local Cat = {}
+local Gila = require "lib/gila"
+local Class, Cat = class(Gila.Widget)
 
 
 local CAT_COLOR = C.COLORS.SECONDARY_A3
@@ -34,4 +35,5 @@ function Cat:Draw()
 end
 
 
-return Cat
+local cat_singleton = Class()
+return cat_singleton
