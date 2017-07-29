@@ -1,10 +1,11 @@
 
+local Colors = require "colors"
 local Gila = require "lib/gila"
 local Class, Room = class(Gila.Widget)
 
 
-local LIT_COLOR = {40, 26, 60}
-local DARK_COLOR = {40, 26, 60}
+local LIT_COLOR = Colors.primary_4
+local DARK_COLOR = Colors.complement_5
 
 function Class:SetSize(size)
   self._size = size
