@@ -8,6 +8,7 @@ local House = require "house"
 
 
 function love.load()
+  love.graphics.setNewFont(24)
   love.graphics.setBackgroundColor(46, 69, 57)
 
   House()
