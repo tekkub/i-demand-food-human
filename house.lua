@@ -32,7 +32,7 @@ local function Initialize()
   end
 
   Agni:RegisterCallback(House, "CatMoved")
-  Agni:RegisterCallback(House, "StartNewGame")
+  Agni:RegisterCallback(House, "StartNewGame", "Randomize")
 
   House:Randomize()
 end
@@ -51,11 +51,6 @@ function House:OnCatMoved(message, row, col)
 
   if row ~= food_row or col ~= food_col then return end
   Agni:SendMessage("Win")
-end
-
-
-function House:OnStartNewGame()
-  self:Randomize()
 end
 
 
