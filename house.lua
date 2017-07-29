@@ -1,5 +1,6 @@
 
 local C = require "constants"
+local Cat = require "cat"
 local Room = require "room"
 
 local House = {}
@@ -19,7 +20,7 @@ local function Initialize()
     rooms[row] = {}
 
     for col=1,C.NUM_COLS do
-      local room = Room(x_offset, y_offset)
+      local room = Room(x_offset, y_offset, row, col)
       room.row, room.col = row, col
       rooms[row][col] = room
       flat_rooms[room] = true
@@ -37,6 +38,7 @@ end
 function House:Randomize()
   food_row = math.random(C.NUM_ROWS)
   food_col = math.random(C.NUM_COLS)
+  Cat:Randomize(food_row, food_col, C.NUM_ROWS, C.NUM_COLS)
 
   for room in pairs(flat_rooms) do
     room:Reset(food_row, food_col)

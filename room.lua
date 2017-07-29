@@ -1,5 +1,6 @@
 
 local C = require "constants"
+local Cat = require "cat"
 local Gila = require "lib/gila"
 local Class, Room = class(Gila.Widget)
 
@@ -42,6 +43,8 @@ function Room:Draw()
   local color = self._lit and LIT_COLOR or DARK_COLOR
   love.graphics.setColor(color)
   love.graphics.rectangle("fill", 0, 0, size, size)
+
+  if Cat:IsInRoom(self._row, self._col) then Cat:Draw() end
 
   if self._lit then
     -- Distance text
