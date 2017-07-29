@@ -30,9 +30,14 @@ end
 
 
 function Room:Draw()
+  love.graphics.push()
+  love.graphics.translate(self._x, self._y)
+
   local color = self._lit and LIT_COLOR or DARK_COLOR
   love.graphics.setColor(color)
-  love.graphics.rectangle("fill", self._x, self._y, Class._size, Class._size)
+  love.graphics.rectangle("fill", 0, 0, Class._size, Class._size)
+
+  love.graphics.pop()
 end
 
 
