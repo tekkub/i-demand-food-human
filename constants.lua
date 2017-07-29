@@ -5,8 +5,8 @@ local C = {
   -- Room layout
   NUM_ROWS = 6,
   NUM_COLS = 4,
-  ROOM_SIZE = 80,
-  HOUSE_MARGIN = 28,
+  ROOM_SIZE = 64,
+  HOUSE_MARGIN = 60,
   ROOM_MARGIN = 14,
 
   COLORS = {
