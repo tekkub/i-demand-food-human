@@ -19,7 +19,7 @@ function Cat:Randomize(food_row, food_col, num_rows, num_cols)
   repeat
     Randomize(num_rows, num_cols)
   until row ~= food_row or col ~= food_col
-  print(row, col)
+  return row, col
 end
 
 

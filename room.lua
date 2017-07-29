@@ -32,7 +32,6 @@ end
 function Room:Reset(food_row, food_col)
   self._dist = math.abs(self.row - food_row) + math.abs(self.col - food_col)
   self._lit = false
-  self._lit = true
 end
 
 
@@ -61,6 +60,11 @@ function Room:Draw()
   end
 
   love.graphics.pop()
+end
+
+
+function Room:Light()
+  self._lit = true
 end
 
 
