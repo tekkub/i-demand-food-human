@@ -2,7 +2,7 @@
 local C = require "constants"
 local Room = require "room"
 
-local Class, House = class()
+local House = {}
 
 
 local food_row, food_col
@@ -10,7 +10,7 @@ local rooms = {}
 local flat_rooms = {}
 
 
-function House:Initialize()
+local function Initialize()
   Room:SetSize(C.ROOM_SIZE)
   local y_offset = C.HOUSE_MARGIN
 
@@ -30,7 +30,7 @@ function House:Initialize()
     y_offset = y_offset + C.ROOM_SIZE + C.ROOM_MARGIN
   end
 
-  self:Randomize()
+  House:Randomize()
 end
 
 
@@ -44,4 +44,5 @@ function House:Randomize()
 end
 
 
-return Class
+Initialize()
+return House

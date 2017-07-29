@@ -9,8 +9,6 @@ local House = require "house"
 
 
 function love.load()
-
-  House()
   love.graphics.setNewFont(C.FONT_SIZE)
   love.graphics.setBackgroundColor(C.COLORS.SECONDARY_A4)
 end
