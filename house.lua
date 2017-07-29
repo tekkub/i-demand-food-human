@@ -1,5 +1,5 @@
 
-local Messages = require "lib/messages"
+local Agni = require "lib/agni"
 
 local C = require "constants"
 local Cat = require "cat"
@@ -31,8 +31,8 @@ local function Initialize()
     y_offset = y_offset + C.ROOM_SIZE + C.ROOM_MARGIN
   end
 
-  Messages:RegisterCallback(House, "CatMoved")
-  Messages:RegisterCallback(House, "StartNewGame")
+  Agni:RegisterCallback(House, "CatMoved")
+  Agni:RegisterCallback(House, "StartNewGame")
 
   House:Randomize()
 end
@@ -40,7 +40,7 @@ end
 
 function House:Randomize()
   food_row, food_col = Room:GetRandom()
-  Messages:SendMessage("FoodMoved", food_row, food_col)
+  Agni:SendMessage("FoodMoved", food_row, food_col)
   Cat:Randomize(food_row, food_col)
 end
 
@@ -50,7 +50,7 @@ function House:OnCatMoved(message, row, col)
   Cat:SetParent(cat_room)
 
   if row ~= food_row or col ~= food_col then return end
-  Messages:SendMessage("Win")
+  Agni:SendMessage("Win")
 end
 
 

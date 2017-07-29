@@ -1,6 +1,6 @@
 
+local Agni = require "lib/agni"
 local Gila = require "lib/gila"
-local Messages = require "lib/messages"
 
 local C = require "constants"
 
@@ -26,8 +26,8 @@ function Room:Initialize(x, y, row, col, ...)
   self._row = row
   self._col = col
 
-  Messages:RegisterCallback(self, "CatMoved")
-  Messages:RegisterCallback(self, "FoodMoved")
+  Agni:RegisterCallback(self, "CatMoved")
+  Agni:RegisterCallback(self, "FoodMoved")
 
   return super(self, x, y, row, col, ...)
 end

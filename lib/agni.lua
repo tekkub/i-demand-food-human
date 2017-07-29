@@ -1,10 +1,10 @@
 
-local Messages = {}
+local Agni = {}
 
 local callbacks = {}
 
 
-function Messages:RegisterCallback(context, message, func)
+function Agni:RegisterCallback(context, message, func)
 	assert(context, "`context` must not be nil")
 	assert(message, "`message` must not be nil")
 	if not callbacks[message] then callbacks[message] = {} end
@@ -13,7 +13,7 @@ function Messages:RegisterCallback(context, message, func)
 end
 
 
-function Messages:SendMessage(message, ...)
+function Agni:SendMessage(message, ...)
 	assert(message, "`message` must not be nil")
 	if not callbacks[message] then return end
 
@@ -25,4 +25,4 @@ function Messages:SendMessage(message, ...)
 end
 
 
-return Messages
+return Agni

@@ -1,6 +1,6 @@
 
+local Agni = require "lib/agni"
 local Gila = require "lib/gila"
-local Messages = require "lib/messages"
 
 local C = require "constants"
 local Room = require "room"
@@ -21,7 +21,7 @@ function Cat:Randomize(food_row, food_col)
   repeat
     row, col = Room:GetRandom()
   until row ~= food_row or col ~= food_col
-  Messages:SendMessage("CatMoved", row, col)
+  Agni:SendMessage("CatMoved", row, col)
 end
 
 
@@ -38,7 +38,7 @@ end
 
 local function SendMovedMessage()
   power = power - 1
-  Messages:SendMessage("CatMoved", row, col)
+  Agni:SendMessage("CatMoved", row, col)
 end
 
 
@@ -72,7 +72,7 @@ end
 
 function Cat:OnKeyPressed(message, key)
   if power == 0 then
-    if key == "space" then Messages:SendMessage("StartNewGame") end
+    if key == "space" then Agni:SendMessage("StartNewGame") end
     return
   end
 
@@ -105,8 +105,8 @@ function power_widget:Draw()
 end
 
 
-Messages:RegisterCallback(Cat, "KeyPressed")
-Messages:RegisterCallback(Cat, "Win")
+Agni:RegisterCallback(Cat, "KeyPressed")
+Agni:RegisterCallback(Cat, "Win")
 
 
 return Cat

@@ -3,8 +3,8 @@ math.randomseed(os.time())
 
 
 require "lib/class"
+local Agni = require "lib/agni"
 local Gila = require "lib/gila"
-local Messages = require "lib/messages"
 
 local C = require "constants"
 local House = require "house"
@@ -17,7 +17,7 @@ end
 
 
 function love.keypressed(key)
-  Messages:SendMessage("KeyPressed", key)
+  Agni:SendMessage("KeyPressed", key)
 end
 
 
