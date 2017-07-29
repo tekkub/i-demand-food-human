@@ -9,9 +9,11 @@ local DARK_COLOR = Colors.complement_5
 local TEXT_COLOR = Colors.secondary_b2
 local FOOD_COLOR = Colors.secondary_b5
 
+local size
 
-function Class:SetSize(size)
-  self._size = size
+
+function Class:SetSize(new_size)
+  size = new_size
 end
 
 
@@ -39,7 +41,7 @@ function Room:Draw()
 
   local color = self._lit and LIT_COLOR or DARK_COLOR
   love.graphics.setColor(color)
-  love.graphics.rectangle("fill", 0, 0, Class._size, Class._size)
+  love.graphics.rectangle("fill", 0, 0, size, size)
 
   if self._lit then
     -- Distance text
@@ -48,8 +50,8 @@ function Room:Draw()
 
     -- Draw the food
     if self._dist == 0 then
-      local offset = Class._size/2
-      local radius = Class._size/8
+      local offset = size/2
+      local radius = size/8
       love.graphics.setColor(FOOD_COLOR)
       love.graphics.circle("fill", offset, offset, radius, 50)
     end
