@@ -11,9 +11,6 @@ local Room = require "room"
 local House = {}
 
 
-local food_row, food_col
-
-
 local function Initialize()
   local y_offset = C.HOUSE_MARGIN
 
