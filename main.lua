@@ -2,10 +2,13 @@
 require "lib/class"
 
 local Gila = require "lib/gila"
+local House = require "house"
 
 
 function love.load()
   love.graphics.setBackgroundColor(46, 69, 57)
+
+  House()
 end
 
 
