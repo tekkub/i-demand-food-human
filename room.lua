@@ -5,7 +5,7 @@ local Gila = require "lib/gila"
 local C = require "constants"
 
 
-local Class, Room = class(Gila.Widget)
+local Class, Room = class(Gila.Button)
 
 
 local CARPET = love.graphics.newImage("assets/carpet.png")
@@ -39,6 +39,9 @@ function Room:Initialize(x, y, row, col, ...)
   self._row = row
   self._col = col
 
+  self:SetOffset(x, y)
+  self:SetSize(C.ROOM_SIZE, C.ROOM_SIZE)
+
   flat_rooms[self] = true
   rooms[row] = rooms[row] or {}
   rooms[row][col] = self
@@ -71,6 +74,11 @@ function Room:Draw()
     love.graphics.setColor(DARK_COLOR)
     love.graphics.rectangle("fill", 0, 0, C.ROOM_SIZE, C.ROOM_SIZE)
   end
+end
+
+
+function Room:OnClick()
+  print("Room clicked", self._row, self._col)
 end
 
 

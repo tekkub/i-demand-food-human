@@ -24,3 +24,13 @@ end
 function love.keypressed(key)
   Agni:SendMessage("KeyPressed", key)
 end
+
+
+function love.mousepressed(...)
+  Gila:MousePressed(...)
+end
+
+
+function love.mousereleased(...)
+  Gila:MouseReleased(...)
+end
