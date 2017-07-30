@@ -5,23 +5,22 @@ local widgets = {}
 local parents = {}
 
 
+local function Draw(widget)
+  love.graphics.push()
+
+  widget:Draw()
+
+  for child,parent in pairs(parents) do
+    if parent == widget then Draw(child) end
+  end
+
+  love.graphics.pop()
+end
+
+
 function Class:Draw()
   for widget in pairs(widgets) do
-    if not parents[widget] then
-      love.graphics.push()
-
-      widget:Draw()
-
-      for child,parent in pairs(parents) do
-        if parent == widget then
-          love.graphics.push()
-          child:Draw()
-          love.graphics.pop()
-        end
-      end
-
-      love.graphics.pop()
-    end
+    if not parents[widget] then Draw(widget) end
   end
 end
 
