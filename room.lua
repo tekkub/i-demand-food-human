@@ -82,14 +82,9 @@ function Room:OnClick()
 end
 
 
-function Room:Light()
-  self._lit = true
-end
-
-
 function Room:OnCatMoved(message, row, col)
   if row ~= self._row or col ~= self._col then return end
-  self:Light()
+  self._lit = true
 end
 
 
