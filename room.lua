@@ -17,6 +17,10 @@ local flat_rooms = {}
 local rooms = {}
 
 
+function Class:Distance(r1, c1, r2, c2)
+  return math.abs(r1 - r2) + math.abs(c1 - c2)
+end
+
 function Class:GetRandom()
   return math.random(C.NUM_ROWS), math.random(C.NUM_COLS)
 end
@@ -50,7 +54,7 @@ end
 
 
 function Room:Reset(food_row, food_col)
-  self._dist = math.abs(self._row - food_row) + math.abs(self._col - food_col)
+  self._dist = Class:Distance(self._row, self._col, food_row, food_col)
   self._lit = false
 end
 
@@ -73,7 +77,7 @@ end
 
 
 function Room:OnClick()
-  print("Room clicked", self._row, self._col)
+  Agni:SendMessage("RoomClicked", self._row, self._col)
 end
 
 

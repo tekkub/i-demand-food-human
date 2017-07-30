@@ -86,7 +86,18 @@ function Cat:OnKeyPressed(message, key)
 end
 
 
+function Cat:OnRoomClicked(message, new_row, new_col)
+  local dist = Room:Distance(row, col, new_row, new_col)
+  if dist ~= 1 or not CatPower:CanMove() then return end
+
+  row, col = new_row, new_col
+  CatPower:Decrement()
+  Moved()
+end
+
+
 Agni:RegisterCallback(Cat, "KeyPressed")
+Agni:RegisterCallback(Cat, "RoomClicked")
 
 
 return Cat
