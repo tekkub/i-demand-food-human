@@ -18,16 +18,13 @@ end
 
 
 local super = Button.Initialize
-function Button:Initialize(...)
-  buttons[self] = true
-
-  return super(self, ...)
-end
-
-
-function Button:SetSize(w, h)
+function Button:Initialize(x, y, w, h)
   self._width  = w
   self._height = h
+
+  buttons[self] = true
+
+  return super(self, x, y)
 end
 
 

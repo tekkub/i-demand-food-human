@@ -38,11 +38,9 @@ end
 
 
 local super = Room.Initialize
-function Room:Initialize(x, y, row, col, ...)
+function Room:Initialize(x, y, row, col)
   self._row = row
   self._col = col
-
-  self:SetSize(C.ROOM_SIZE, C.ROOM_SIZE)
 
   flat_rooms[self] = true
   rooms[row] = rooms[row] or {}
@@ -50,7 +48,7 @@ function Room:Initialize(x, y, row, col, ...)
 
   Agni:RegisterCallback(self, "CatMoved")
 
-  return super(self, x, y, row, col, ...)
+  return super(self, x, y, C.ROOM_SIZE, C.ROOM_SIZE)
 end
 
 
