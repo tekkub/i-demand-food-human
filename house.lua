@@ -25,13 +25,13 @@ local function Initialize()
     y_offset = y_offset + C.ROOM_SIZE + C.ROOM_MARGIN
   end
 
-  Agni:RegisterCallback(House, "StartNewGame", "Randomize")
+  Agni:RegisterCallback(House, "StartNewGame")
 
-  House:Randomize()
+  House:OnStartNewGame()
 end
 
 
-function House:Randomize()
+function House:OnStartNewGame()
   local row, col = Food:Randomize()
   Room:Reset(row, col)
   Cat:Randomize(row, col)
