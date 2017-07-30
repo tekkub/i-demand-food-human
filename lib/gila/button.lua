@@ -18,16 +18,10 @@ end
 
 
 local super = Button.Initialize
-function Button:Initialize()
+function Button:Initialize(...)
   buttons[self] = true
 
-  return super(self)
-end
-
-
-function Button:SetOffset(x, y)
-  self._dx = x
-  self._dy = y
+  return super(self, ...)
 end
 
 

@@ -8,6 +8,10 @@ local parents = {}
 local function Draw(widget)
   love.graphics.push()
 
+  if widget._dx and widget._dy then
+    love.graphics.translate(widget._dx, widget._dy)
+  end
+
   widget:Draw()
 
   for child,parent in pairs(parents) do
@@ -25,7 +29,10 @@ function Class:Draw()
 end
 
 
-function Widget:Initialize()
+function Widget:Initialize(x, y)
+  self._dx = x
+  self._dy = y
+
   widgets[self] = true
 end
 

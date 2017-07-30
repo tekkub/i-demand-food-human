@@ -34,12 +34,9 @@ end
 
 local super = Room.Initialize
 function Room:Initialize(x, y, row, col, ...)
-  self._x = x
-  self._y = y
   self._row = row
   self._col = col
 
-  self:SetOffset(x, y)
   self:SetSize(C.ROOM_SIZE, C.ROOM_SIZE)
 
   flat_rooms[self] = true
@@ -59,8 +56,6 @@ end
 
 
 function Room:Draw()
-  love.graphics.translate(self._x, self._y)
-
   love.graphics.push()
   love.graphics.scale(0.5)
   love.graphics.setColor(C.COLORS.WHITE)
