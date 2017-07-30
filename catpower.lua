@@ -5,7 +5,7 @@ local Gila = require "lib/gila"
 local C = require "constants"
 
 
-local CatPower = Gila.Button(30, 600, 354, 50)
+local CatPower = Gila.Button(30, 600, 354, 80)
 
 
 local TEXT_COLOR = C.COLORS.SECONDARY_B2
