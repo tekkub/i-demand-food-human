@@ -21,6 +21,7 @@ function Class:Distance(r1, c1, r2, c2)
   return math.abs(r1 - r2) + math.abs(c1 - c2)
 end
 
+
 function Class:GetRandom()
   return math.random(C.NUM_ROWS), math.random(C.NUM_COLS)
 end
