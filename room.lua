@@ -8,9 +8,10 @@ local C = require "constants"
 local Class, Room = class(Gila.Widget)
 
 
+local CARPET = love.graphics.newImage("assets/carpet.png")
+local DARK_COLOR = C.COLORS.GREY_60
 local LIT_COLOR = C.COLORS.PRIMARY_4
-local DARK_COLOR = C.COLORS.COMPLEMENT_5
-local TEXT_COLOR = C.COLORS.SECONDARY_B2
+local TEXT_COLOR = C.COLORS.WHITE
 
 local rooms = {}
 
@@ -51,13 +52,18 @@ end
 function Room:Draw()
   love.graphics.translate(self._x, self._y)
 
-  local color = self._lit and LIT_COLOR or DARK_COLOR
-  love.graphics.setColor(color)
-  love.graphics.rectangle("fill", 0, 0, C.ROOM_SIZE, C.ROOM_SIZE)
+  love.graphics.push()
+  love.graphics.scale(0.5)
+  love.graphics.setColor(C.COLORS.WHITE)
+  love.graphics.draw(CARPET, 0, 0)
+  love.graphics.pop()
 
   if self._lit then
     love.graphics.setColor(TEXT_COLOR)
-    love.graphics.print(self._dist, 4, 4)
+    love.graphics.print(self._dist, 4, 18)
+  else
+    love.graphics.setColor(DARK_COLOR)
+    love.graphics.rectangle("fill", 0, 0, C.ROOM_SIZE, C.ROOM_SIZE)
   end
 end
 

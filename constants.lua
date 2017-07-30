@@ -3,13 +3,16 @@ local C = {
   FONT_SIZE = 24,
 
   -- Room layout
-  NUM_ROWS = 6,
-  NUM_COLS = 4,
+  NUM_ROWS = 8,
+  NUM_COLS = 5,
   ROOM_SIZE = 64,
-  HOUSE_MARGIN = 60,
-  ROOM_MARGIN = 14,
+  HOUSE_MARGIN = 47,
+  ROOM_MARGIN = 0,
 
   COLORS = {
+    WHITE = {255,255,255},
+    GREY_60 = {0,0,0,256*0.6},
+
     -- http://paletton.com/#uid=61D1n0k91iJ3ruf6onOaYcjjub0
     PRIMARY_1 = {149,145,107},
     PRIMARY_2 = {241,238,215},
