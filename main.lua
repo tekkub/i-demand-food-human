@@ -16,11 +16,11 @@ function love.load()
 end
 
 
-function love.keypressed(key)
-  Agni:SendMessage("KeyPressed", key)
+function love.draw()
+  Gila:Draw()
 end
 
 
-function love.draw()
-  Gila:Draw()
+function love.keypressed(key)
+  Agni:SendMessage("KeyPressed", key)
 end
