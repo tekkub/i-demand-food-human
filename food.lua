@@ -9,7 +9,7 @@ local Room = require "room"
 local Food = Gila.Widget()
 
 
-local FOOD_COLOR = C.COLORS.SECONDARY_B5
+local ICON = love.graphics.newImage("assets/food.png")
 
 local row, col, shown
 
@@ -17,10 +17,10 @@ local row, col, shown
 function Food:Draw()
   if not shown then return end
 
-  local offset = C.ROOM_SIZE/2
-  local radius = C.ROOM_SIZE/8
-  love.graphics.setColor(FOOD_COLOR)
-  love.graphics.circle("fill", offset, offset, radius, 50)
+  love.graphics.translate(16, 28)
+  love.graphics.scale(0.25)
+  love.graphics.setColor(C.COLORS.WHITE)
+  love.graphics.draw(ICON, 0, 0)
 end
 
 

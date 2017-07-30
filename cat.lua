@@ -10,8 +10,7 @@ local Room = require "room"
 local Cat = Gila.Widget()
 
 
-local CAT_COLOR = C.COLORS.SECONDARY_A3
-local VERTICES = {8, 0, 16, 8, 8, 16, 0, 8}
+local ICON = love.graphics.newImage("assets/cat.png")
 
 local row, col, food_row, food_col
 
@@ -32,9 +31,10 @@ end
 
 
 function Cat:Draw()
-  love.graphics.translate(32-8, 48-8)
-  love.graphics.setColor(CAT_COLOR)
-  love.graphics.polygon("fill", VERTICES)
+  love.graphics.translate(16, 4)
+  love.graphics.scale(0.25)
+  love.graphics.setColor(C.COLORS.WHITE)
+  love.graphics.draw(ICON, 0, 0)
 end
 
 
