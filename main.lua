@@ -6,8 +6,8 @@ require "lib/class"
 local Agni = require "lib/agni"
 local Gila = require "lib/gila"
 
+require "house"
 local C = require "constants"
-local House = require "house"
 
 
 function love.load()

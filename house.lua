@@ -40,4 +40,3 @@ end
 
 
 Initialize()
-return House
