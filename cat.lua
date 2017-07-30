@@ -86,13 +86,38 @@ function Cat:OnKeyPressed(message, key)
 end
 
 
+local function MoveTowards(new_row, new_col)
+  local d_row = new_row - row
+  local d_col = new_col - col
+  local move_row = d_row ~= 0
+  local move_col = d_col ~= 0
+
+  if move_row and move_col then
+    local coin = math.random(2)
+    move_row = coin == 1
+    move_col = coin == 2
+  end
+
+  if move_row then
+    row = row + (d_row > 0 and 1 or -1)
+  elseif move_col then
+    col = col + (d_col > 0 and 1 or -1)
+  end
+
+  if move_row or move_col then
+    CatPower:Decrement()
+    Moved()
+  end
+end
+
+
 function Cat:OnRoomClicked(message, new_row, new_col)
   local dist = Room:Distance(row, col, new_row, new_col)
-  if dist ~= 1 or not CatPower:CanMove() then return end
+  if dist == 0 or not CatPower:CanMove(dist) then return end
 
-  row, col = new_row, new_col
-  CatPower:Decrement()
-  Moved()
+  repeat
+    MoveTowards(new_row, new_col)
+  until row == new_row and col == new_col or not CatPower:CanMove()
 end
 
 

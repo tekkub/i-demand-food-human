@@ -23,8 +23,9 @@ function CatPower:Decrement()
 end
 
 
-function CatPower:CanMove()
-  return power > 0
+function CatPower:CanMove(dist)
+  dist = dist or 1
+  return power >= dist
 end
 
 
