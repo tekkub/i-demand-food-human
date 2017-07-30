@@ -12,7 +12,7 @@ local Cat = Gila.Widget()
 
 local ICON = love.graphics.newImage("assets/cat.png")
 
-local row, col, food_row, food_col
+local row, col
 
 
 local function Moved()
@@ -21,8 +21,9 @@ local function Moved()
 end
 
 
-function Cat:Randomize()
-  assert(food_row and food_col, "food row and column not set")
+function Cat:Randomize(food_row, food_col)
+  assert(food_row, "food_row required")
+  assert(food_col, "food_col required")
   repeat
     row, col = Room:GetRandom()
   until row ~= food_row or col ~= food_col
@@ -35,11 +36,6 @@ function Cat:Draw()
   love.graphics.scale(0.25)
   love.graphics.setColor(C.COLORS.WHITE)
   love.graphics.draw(ICON, 0, 0)
-end
-
-
-function Cat:OnFoodMoved(message, row, col)
-  food_row, food_col = row, col
 end
 
 
@@ -90,7 +86,6 @@ function Cat:OnKeyPressed(message, key)
 end
 
 
-Agni:RegisterCallback(Cat, "FoodMoved")
 Agni:RegisterCallback(Cat, "KeyPressed")
 
 

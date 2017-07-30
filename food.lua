@@ -28,7 +28,7 @@ function Food:Randomize()
   shown = false
   row, col = Room:GetRandom()
   self:SetParent(Room:GetRoom(row, col))
-  Agni:SendMessage("FoodMoved", row, col)
+  return row, col
 end
 
 

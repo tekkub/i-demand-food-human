@@ -32,8 +32,9 @@ end
 
 
 function House:Randomize()
-  Food:Randomize()
-  Cat:Randomize()
+  local row, col = Food:Randomize()
+  Room:Reset(row, col)
+  Cat:Randomize(row, col)
   CatPower:Reset()
 end
 

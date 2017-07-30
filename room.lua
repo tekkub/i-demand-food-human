@@ -13,6 +13,7 @@ local DARK_COLOR = C.COLORS.GREY_60
 local LIT_COLOR = C.COLORS.PRIMARY_4
 local TEXT_COLOR = C.COLORS.WHITE
 
+local flat_rooms = {}
 local rooms = {}
 
 
@@ -26,6 +27,11 @@ function Class:GetRoom(row, col)
 end
 
 
+function Class:Reset(row, col)
+  for room in pairs(flat_rooms) do room:Reset(row, col) end
+end
+
+
 local super = Room.Initialize
 function Room:Initialize(x, y, row, col, ...)
   self._x = x
@@ -33,11 +39,11 @@ function Room:Initialize(x, y, row, col, ...)
   self._row = row
   self._col = col
 
+  flat_rooms[self] = true
   rooms[row] = rooms[row] or {}
   rooms[row][col] = self
 
   Agni:RegisterCallback(self, "CatMoved")
-  Agni:RegisterCallback(self, "FoodMoved")
 
   return super(self, x, y, row, col, ...)
 end
@@ -70,11 +76,6 @@ end
 
 function Room:Light()
   self._lit = true
-end
-
-
-function Room:OnFoodMoved(message, row, col)
-  self:Reset(row, col)
 end
 
 
