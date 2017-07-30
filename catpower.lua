@@ -5,7 +5,7 @@ local Gila = require "lib/gila"
 local C = require "constants"
 
 
-local CatPower = Gila.Widget()
+local CatPower = Gila.Button(30, 600, 354, 50)
 
 
 local TEXT_COLOR = C.COLORS.SECONDARY_B2
@@ -39,13 +39,19 @@ function CatPower:OnWin()
 end
 
 
+function CatPower:OnClick()
+  if power > 0 then return end
+  Agni:SendMessage("StartNewGame")
+end
+
+
 function CatPower:Draw()
   love.graphics.setColor(TEXT_COLOR)
 
   if power == 0 then
-    love.graphics.print("Press space to restart", 30, 600)
+    love.graphics.print("Click here\nor press space to restart", 0, 0)
   else
-    love.graphics.print("CatPower left: ".. power, 30, 600)
+    love.graphics.print("CatPower left: ".. power, 0, 0)
   end
 end
 
