@@ -34,6 +34,9 @@ end
 
 
 function Button:IsInsideMe(x, y)
+  local has_attrs = self._dx and self._dy and self._width and self._height
+  if not has_attrs then return false end
+
   if x < self._dx then return false end
   if y < self._dy then return false end
   if x > (self._dx + self._width) then return false end
