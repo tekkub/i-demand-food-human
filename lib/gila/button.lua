@@ -36,7 +36,7 @@ function Button:OnClick(mouse_button)
 end
 
 
-function Button:InsideMe(x, y)
+function Button:IsInsideMe(x, y)
   if x < self._dx then return false end
   if y < self._dy then return false end
   if x > (self._dx + self._width) then return false end
@@ -46,12 +46,12 @@ end
 
 
 function Button:MousePressed(x, y, mouse_button, is_touch)
-  if self:InsideMe(x, y) then self._clicking = mouse_button end
+  if self:IsInsideMe(x, y) then self._clicking = mouse_button end
 end
 
 
 function Button:MouseReleased(x, y, mouse_button, is_touch)
-  if self._clicking == mouse_button and self:InsideMe(x, y) then
+  if self._clicking == mouse_button and self:IsInsideMe(x, y) then
     self:OnClick(mouse_button)
   end
 
