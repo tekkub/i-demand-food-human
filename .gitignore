@@ -1,3 +1,5 @@
 
 *.love
 *.zip
+
+dist/win64/I-demand-food-human.exe
