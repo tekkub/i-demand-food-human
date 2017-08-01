@@ -16,46 +16,46 @@ local TEXT_COLOR = C.COLORS.WHITE
 local rooms = {}
 
 
-function Class:Distance(r1, c1, r2, c2)
+function Class:distance(r1, c1, r2, c2)
   return math.abs(r1 - r2) + math.abs(c1 - c2)
 end
 
 
-function Class:GetRandom()
+function Class:get_random()
   return math.random(C.NUM_ROWS), math.random(C.NUM_COLS)
 end
 
 
-function Class:GetRoom(row, col)
+function Class:get_room(row, col)
   return rooms[row][col]
 end
 
 
-function Class:Reset(row, col)
-  for room in pairs(self._instances) do room:Reset(row, col) end
+function Class:reset(row, col)
+  for room in pairs(self._instances) do room:reset(row, col) end
 end
 
 
-function Room:Initialize(x, y, row, col)
+function Room:initialize(x, y, row, col)
   self._row = row
   self._col = col
 
   rooms[row] = rooms[row] or {}
   rooms[row][col] = self
 
-  Agni:RegisterCallback(self, "CatMoved")
+  Agni:register_callback(self, "cat_moved")
 
-  return Room.super(self, "Initialize", x, y, C.ROOM_SIZE, C.ROOM_SIZE)
+  return Room._super(self, "initialize", x, y, C.ROOM_SIZE, C.ROOM_SIZE)
 end
 
 
-function Room:Reset(food_row, food_col)
-  self._dist = Class:Distance(self._row, self._col, food_row, food_col)
+function Room:reset(food_row, food_col)
+  self._dist = Class:distance(self._row, self._col, food_row, food_col)
   self._lit = false
 end
 
 
-function Room:Draw()
+function Room:draw()
   love.graphics.push()
   love.graphics.scale(0.5)
   love.graphics.setColor(C.COLORS.WHITE)
@@ -72,12 +72,12 @@ function Room:Draw()
 end
 
 
-function Room:OnClick()
-  Agni:SendMessage("RoomClicked", self._row, self._col)
+function Room:on_click()
+  Agni:send_message("room_clicked", self._row, self._col)
 end
 
 
-function Room:OnCatMoved(message, row, col)
+function Room:on_cat_moved(message, row, col)
   if row ~= self._row or col ~= self._col then return end
   self._lit = true
 end

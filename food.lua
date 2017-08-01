@@ -6,7 +6,7 @@ local C = require "constants"
 local Room = require "room"
 
 
-local Food = Gila.Widget()
+local food = Gila.Widget()
 
 
 local ICON = love.graphics.newImage("assets/food.png")
@@ -14,7 +14,7 @@ local ICON = love.graphics.newImage("assets/food.png")
 local row, col, shown
 
 
-function Food:Draw()
+function food:draw()
   if not shown then return end
 
   love.graphics.translate(16, 28)
@@ -24,20 +24,20 @@ function Food:Draw()
 end
 
 
-function Food:Randomize()
+function food:randomize()
   shown = false
-  row, col = Room:GetRandom()
-  self:SetParent(Room:GetRoom(row, col))
+  row, col = Room:get_random()
+  self:set_parent(Room:get_room(row, col))
   return row, col
 end
 
 
-function Food:OnCatMoved(message, cat_row, cat_col)
+function food:on_cat_moved(message, cat_row, cat_col)
   shown = (cat_row == row and cat_col == col)
-  if shown then Agni:SendMessage("Win") end
+  if shown then Agni:send_message("win") end
 end
 
 
-Agni:RegisterCallback(Food, "CatMoved")
+Agni:register_callback(food, "cat_moved")
 
-return Food
+return food

@@ -16,19 +16,19 @@ local y = Class2()
 local z = Class3()
 
 v1, v2, v3 = nil
-x:super("test", 1)
+x:_super("test", 1)
 assert(not v1)
 assert(not v2)
 assert(not v3)
 
 v1, v2, v3 = nil
-y:super("test", 1)
+y:_super("test", 1)
 assert(v1 == 1)
 assert(not v2)
 assert(not v3)
 
 v1, v2, v3 = nil
-z:super("test", 1)
+z:_super("test", 1)
 assert(not v1)
 assert(v2 == 1)
 assert(not v3)

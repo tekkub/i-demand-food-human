@@ -5,26 +5,26 @@ local Class, Widget = class()
 Class._orphans = {}
 
 
-local function Draw(widget)
+local function draw(widget)
   love.graphics.push()
 
   if widget._dx and widget._dy then
     love.graphics.translate(widget._dx, widget._dy)
   end
 
-  widget:Draw()
-  for child in pairs(widget._children) do Draw(child) end
+  widget:draw()
+  for child in pairs(widget._children) do draw(child) end
 
   love.graphics.pop()
 end
 
 
-function Class:Draw()
-  for widget in pairs(Class._orphans) do Draw(widget) end
+function Class:draw()
+  for widget in pairs(Class._orphans) do draw(widget) end
 end
 
 
-function Widget:Initialize(x, y)
+function Widget:initialize(x, y)
   self._children = {}
   self._dx = x
   self._dy = y
@@ -33,7 +33,7 @@ function Widget:Initialize(x, y)
 end
 
 
-function Widget:SetParent(parent)
+function Widget:set_parent(parent)
   if self._parent then self._parent._children[self] = nil end
   Class._orphans[self] = nil
 
@@ -46,8 +46,8 @@ function Widget:SetParent(parent)
 end
 
 
-function Widget:Draw()
-  error("Widget:Draw() not implemented")
+function Widget:draw()
+  error("Widget:draw() not implemented")
 end
 
 

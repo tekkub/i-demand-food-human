@@ -5,7 +5,7 @@ local Gila = require "lib/gila"
 local C = require "constants"
 
 
-local CatPower = Gila.Button(30, 600, 354, 80)
+local cat_power = Gila.Button(30, 600, 354, 80)
 
 
 local TEXT_COLOR = C.COLORS.SECONDARY_B2
@@ -13,40 +13,40 @@ local TEXT_COLOR = C.COLORS.SECONDARY_B2
 local power
 
 
-function CatPower:Reset()
+function cat_power:reset()
   power = 10
 end
 
 
-function CatPower:Decrement()
+function cat_power:decrement()
   power = power - 1
 end
 
 
-function CatPower:CanMove(dist)
+function cat_power:can_move(dist)
   dist = dist or 1
   return power >= dist
 end
 
 
-function CatPower:OnKeyPressed(message, key)
+function cat_power:on_key_pressed(message, key)
   if power > 0 then return end
-  if key == "space" then Agni:SendMessage("StartNewGame") end
+  if key == "space" then Agni:send_message("start_new_game") end
 end
 
 
-function CatPower:OnWin()
+function cat_power:on_win()
   power = 0
 end
 
 
-function CatPower:OnClick()
+function cat_power:on_click()
   if power > 0 then return end
-  Agni:SendMessage("StartNewGame")
+  Agni:send_message("start_new_game")
 end
 
 
-function CatPower:Draw()
+function cat_power:draw()
   love.graphics.setColor(TEXT_COLOR)
 
   if power == 0 then
@@ -57,8 +57,8 @@ function CatPower:Draw()
 end
 
 
-Agni:RegisterCallback(CatPower, "KeyPressed")
-Agni:RegisterCallback(CatPower, "Win")
+Agni:register_callback(cat_power, "key_pressed")
+Agni:register_callback(cat_power, "win")
 
 
-return CatPower
+return cat_power

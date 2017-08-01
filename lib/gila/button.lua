@@ -5,19 +5,19 @@ local Widget = require "lib/gila/widget"
 local Class, Button = class(Widget)
 
 
-function Class:MousePressed(x, y, mouse_button, is_touch)
+function Class:on_mouse_pressed(x, y, mouse_button, is_touch)
   for button in pairs(self._instances) do
-    if button:IsInsideMe(x, y) then
+    if button:is_inside_me(x, y) then
       button._clicking = mouse_button
     end
   end
 end
 
 
-function Class:MouseReleased(x, y, mouse_button, is_touch)
+function Class:on_mouse_released(x, y, mouse_button, is_touch)
   for button in pairs(self._instances) do
-    if button._clicking == mouse_button and button:IsInsideMe(x, y) then
-      button:OnClick(mouse_button)
+    if button._clicking == mouse_button and button:is_inside_me(x, y) then
+      button:on_click(mouse_button)
     end
 
     button._clicking = nil
@@ -25,20 +25,20 @@ function Class:MouseReleased(x, y, mouse_button, is_touch)
 end
 
 
-function Button:Initialize(x, y, w, h)
+function Button:initialize(x, y, w, h)
   self._width  = w
   self._height = h
 
-  return Button.super(self, "Initialize", x, y)
+  return Button._super(self, "initialize", x, y)
 end
 
 
-function Button:OnClick(mouse_button)
+function Button:on_click(mouse_button)
   -- override me!
 end
 
 
-function Button:IsInsideMe(x, y)
+function Button:is_inside_me(x, y)
   local has_attrs = self._dx and self._dy and self._width and self._height
   if not has_attrs then return false end
 

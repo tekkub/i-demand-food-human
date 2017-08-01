@@ -5,7 +5,7 @@ require "lib/class"
 -- Test __call metamethod
 local Class, Instance = class()
 local called = false
-function Instance.Initialize()
+function Instance.initialize()
   called = true
 end
 

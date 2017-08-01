@@ -2,16 +2,16 @@
 local Agni = require "lib/agni"
 
 local C = require "constants"
-local Cat = require "cat"
-local CatPower = require "catpower"
-local Food = require "food"
+local cat = require "cat"
+local cat_power = require "catpower"
+local food = require "food"
 local Room = require "room"
 
 
-local House = {}
+local house = {}
 
 
-local function Initialize()
+local function initialize()
   local y_offset = C.HOUSE_MARGIN
 
   for row=1,C.NUM_ROWS do
@@ -25,18 +25,18 @@ local function Initialize()
     y_offset = y_offset + C.ROOM_SIZE + C.ROOM_MARGIN
   end
 
-  Agni:RegisterCallback(House, "StartNewGame")
+  Agni:register_callback(house, "start_new_game")
 
-  House:OnStartNewGame()
+  house:on_start_new_game()
 end
 
 
-function House:OnStartNewGame()
-  local row, col = Food:Randomize()
-  Room:Reset(row, col)
-  Cat:Randomize(row, col)
-  CatPower:Reset()
+function house:on_start_new_game()
+  local row, col = food:randomize()
+  Room:reset(row, col)
+  cat:randomize(row, col)
+  cat_power:reset()
 end
 
 
-Initialize()
+initialize()

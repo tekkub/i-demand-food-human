@@ -3,11 +3,11 @@ local Agni = require "lib/agni"
 local Gila = require "lib/gila"
 
 local C = require "constants"
-local CatPower = require "catpower"
+local cat_power = require "catpower"
 local Room = require "room"
 
 
-local Cat = Gila.Widget()
+local cat = Gila.Widget()
 
 
 local ICON = love.graphics.newImage("assets/cat.png")
@@ -15,23 +15,23 @@ local ICON = love.graphics.newImage("assets/cat.png")
 local row, col
 
 
-local function Moved()
-  Cat:SetParent(Room:GetRoom(row, col))
-  Agni:SendMessage("CatMoved", row, col)
+local function moved()
+  cat:set_parent(Room:get_room(row, col))
+  Agni:send_message("cat_moved", row, col)
 end
 
 
-function Cat:Randomize(food_row, food_col)
+function cat:randomize(food_row, food_col)
   assert(food_row, "food_row required")
   assert(food_col, "food_col required")
   repeat
-    row, col = Room:GetRandom()
+    row, col = Room:get_random()
   until row ~= food_row or col ~= food_col
-  Moved()
+  moved()
 end
 
 
-function Cat:Draw()
+function cat:draw()
   love.graphics.translate(16, 4)
   love.graphics.scale(0.25)
   love.graphics.setColor(C.COLORS.WHITE)
@@ -39,54 +39,54 @@ function Cat:Draw()
 end
 
 
-local function MoveLeft()
+local function move_left()
   if col <= 1 then return end
   col = col - 1
-  CatPower:Decrement()
-  Moved()
+  cat_power:decrement()
+  moved()
 end
 
 
-local function MoveRight()
+local function move_right()
   if col >= C.NUM_COLS then return end
   col = col + 1
-  CatPower:Decrement()
-  Moved()
+  cat_power:decrement()
+  moved()
 end
 
 
-local function MoveUp()
+local function move_up()
   if row <= 1 then return end
   row = row - 1
-  CatPower:Decrement()
-  Moved()
+  cat_power:decrement()
+  moved()
 end
 
 
-local function MoveDown()
+local function move_down()
   if row >= C.NUM_ROWS then return end
   row = row + 1
-  CatPower:Decrement()
-  Moved()
+  cat_power:decrement()
+  moved()
 end
 
 
 local keymap = {
-  up    = MoveUp,
-  left  = MoveLeft,
-  down  = MoveDown,
-  right = MoveRight,
-  w     = MoveUp,
-  a     = MoveLeft,
-  s     = MoveDown,
-  d     = MoveRight,
+  up    = move_up,
+  left  = move_left,
+  down  = move_down,
+  right = move_right,
+  w     = move_up,
+  a     = move_left,
+  s     = move_down,
+  d     = move_right,
 }
-function Cat:OnKeyPressed(message, key)
-  if keymap[key] and CatPower:CanMove() then keymap[key]() end
+function cat:on_key_pressed(message, key)
+  if keymap[key] and cat_power:can_move() then keymap[key]() end
 end
 
 
-local function MoveTowards(new_row, new_col)
+local function move_towards(new_row, new_col)
   local d_row = new_row - row
   local d_col = new_col - col
   local move_row = d_row ~= 0
@@ -105,24 +105,24 @@ local function MoveTowards(new_row, new_col)
   end
 
   if move_row or move_col then
-    CatPower:Decrement()
-    Moved()
+    cat_power:decrement()
+    moved()
   end
 end
 
 
-function Cat:OnRoomClicked(message, new_row, new_col)
-  local dist = Room:Distance(row, col, new_row, new_col)
-  if dist == 0 or not CatPower:CanMove(dist) then return end
+function cat:on_room_clicked(message, new_row, new_col)
+  local dist = Room:distance(row, col, new_row, new_col)
+  if dist == 0 or not cat_power:can_move(dist) then return end
 
   repeat
-    MoveTowards(new_row, new_col)
-  until row == new_row and col == new_col or not CatPower:CanMove()
+    move_towards(new_row, new_col)
+  until row == new_row and col == new_col or not cat_power:can_move()
 end
 
 
-Agni:RegisterCallback(Cat, "KeyPressed")
-Agni:RegisterCallback(Cat, "RoomClicked")
+Agni:register_callback(cat, "key_pressed")
+Agni:register_callback(cat, "room_clicked")
 
 
-return Cat
+return cat

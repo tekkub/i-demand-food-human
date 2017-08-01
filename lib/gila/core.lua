@@ -5,17 +5,17 @@ local Gila = {
 }
 
 
-function Gila:Draw()
-  self.Widget:Draw()
+function Gila:draw()
+  self.Widget:draw()
 end
 
-function Gila:MousePressed(...)
-  self.Button:MousePressed(...)
+function Gila:on_mouse_pressed(...)
+  self.Button:on_mouse_pressed(...)
 end
 
 
-function Gila:MouseReleased(...)
-  self.Button:MouseReleased(...)
+function Gila:on_mouse_released(...)
+  self.Button:on_mouse_released(...)
 end
 
 

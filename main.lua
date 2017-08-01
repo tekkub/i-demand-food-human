@@ -17,20 +17,20 @@ end
 
 
 function love.draw()
-  Gila:Draw()
+  Gila:draw()
 end
 
 
 function love.keypressed(key)
-  Agni:SendMessage("KeyPressed", key)
+  Agni:send_message("key_pressed", key)
 end
 
 
 function love.mousepressed(...)
-  Gila:MousePressed(...)
+  Gila:on_mouse_pressed(...)
 end
 
 
 function love.mousereleased(...)
-  Gila:MouseReleased(...)
+  Gila:on_mouse_released(...)
 end
