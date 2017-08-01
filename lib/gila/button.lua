@@ -25,12 +25,11 @@ function Class:MouseReleased(x, y, mouse_button, is_touch)
 end
 
 
-local super = Button.Initialize
 function Button:Initialize(x, y, w, h)
   self._width  = w
   self._height = h
 
-  return super(self, x, y)
+  return Button.super(self, "Initialize", x, y)
 end
 
 

@@ -36,7 +36,6 @@ function Class:Reset(row, col)
 end
 
 
-local super = Room.Initialize
 function Room:Initialize(x, y, row, col)
   self._row = row
   self._col = col
@@ -46,7 +45,7 @@ function Room:Initialize(x, y, row, col)
 
   Agni:RegisterCallback(self, "CatMoved")
 
-  return super(self, x, y, C.ROOM_SIZE, C.ROOM_SIZE)
+  return Room.super(self, "Initialize", x, y, C.ROOM_SIZE, C.ROOM_SIZE)
 end
 
 
