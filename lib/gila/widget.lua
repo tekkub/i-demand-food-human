@@ -5,22 +5,8 @@ local Class, Widget = class()
 Class._orphans = {}
 
 
-local function draw(widget)
-  love.graphics.push()
-
-  if widget._dx and widget._dy then
-    love.graphics.translate(widget._dx, widget._dy)
-  end
-
-  widget:draw()
-  for child in pairs(widget._children) do draw(child) end
-
-  love.graphics.pop()
-end
-
-
 function Class:draw()
-  for widget in pairs(Class._orphans) do draw(widget) end
+  for widget in pairs(Class._orphans) do widget:_draw() end
 end
 
 
@@ -43,6 +29,22 @@ function Widget:set_parent(parent)
   else
     Class._orphans[self] = true
   end
+end
+
+
+-- Internal method for drawing the widget and its children
+-- To implement the actual rendering, override `draw()` instead
+function Widget:_draw()
+  love.graphics.push()
+
+  if self._dx and self._dy then
+    love.graphics.translate(self._dx, self._dy)
+  end
+
+  self:draw()
+  for child in pairs(self._children) do child:_draw() end
+
+  love.graphics.pop()
 end
 
 
