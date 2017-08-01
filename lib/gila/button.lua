@@ -4,16 +4,14 @@ local Widget = require "lib/gila/widget"
 
 local Class, Button = class(Widget)
 
-local buttons = {}
-
 
 function Class:MousePressed(...)
-  for button in pairs(buttons) do button:MousePressed(...) end
+  for button in pairs(self._instances) do button:MousePressed(...) end
 end
 
 
 function Class:MouseReleased(...)
-  for button in pairs(buttons) do button:MouseReleased(...) end
+  for button in pairs(self._instances) do button:MouseReleased(...) end
 end
 
 
@@ -21,8 +19,6 @@ local super = Button.Initialize
 function Button:Initialize(x, y, w, h)
   self._width  = w
   self._height = h
-
-  buttons[self] = true
 
   return super(self, x, y)
 end

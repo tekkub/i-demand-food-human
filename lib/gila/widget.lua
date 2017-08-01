@@ -1,9 +1,6 @@
 
 local Class, Widget = class()
 
-local widgets = {}
-local parents = {}
-
 
 local function Draw(widget)
   love.graphics.push()
@@ -14,7 +11,7 @@ local function Draw(widget)
 
   widget:Draw()
 
-  for child,parent in pairs(parents) do
+  for child,parent in pairs(Class._parents) do
     if parent == widget then Draw(child) end
   end
 
@@ -23,8 +20,8 @@ end
 
 
 function Class:Draw()
-  for widget in pairs(widgets) do
-    if not parents[widget] then Draw(widget) end
+  for widget in pairs(self._instances) do
+    if not self._parents[widget] then Draw(widget) end
   end
 end
 
@@ -32,13 +29,11 @@ end
 function Widget:Initialize(x, y)
   self._dx = x
   self._dy = y
-
-  widgets[self] = true
 end
 
 
 function Widget:SetParent(parent)
-  parents[self] = parent
+  Class._parents[self] = parent
 end
 
 
