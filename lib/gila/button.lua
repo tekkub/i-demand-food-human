@@ -5,13 +5,23 @@ local Widget = require "lib/gila/widget"
 local Class, Button = class(Widget)
 
 
-function Class:MousePressed(...)
-  for button in pairs(self._instances) do button:MousePressed(...) end
+function Class:MousePressed(x, y, mouse_button, is_touch)
+  for button in pairs(self._instances) do
+    if button:IsInsideMe(x, y) then
+      button._clicking = mouse_button
+    end
+  end
 end
 
 
-function Class:MouseReleased(...)
-  for button in pairs(self._instances) do button:MouseReleased(...) end
+function Class:MouseReleased(x, y, mouse_button, is_touch)
+  for button in pairs(self._instances) do
+    if button._clicking == mouse_button and button:IsInsideMe(x, y) then
+      button:OnClick(mouse_button)
+    end
+
+    button._clicking = nil
+  end
 end
 
 
@@ -38,20 +48,6 @@ function Button:IsInsideMe(x, y)
   if x > (self._dx + self._width) then return false end
   if y > (self._dy + self._height) then return false end
   return true
-end
-
-
-function Button:MousePressed(x, y, mouse_button, is_touch)
-  if self:IsInsideMe(x, y) then self._clicking = mouse_button end
-end
-
-
-function Button:MouseReleased(x, y, mouse_button, is_touch)
-  if self._clicking == mouse_button and self:IsInsideMe(x, y) then
-    self:OnClick(mouse_button)
-  end
-
-  self._clicking = nil
 end
 
 
